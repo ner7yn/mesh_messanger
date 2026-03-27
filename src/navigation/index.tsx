@@ -4,18 +4,18 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useAppStore } from '@store/index';
-import { useTheme } from '@hooks/useTheme';
+import { useAppStore } from '../store/index';
+import { useTheme } from '../hooks/useTheme';
 
 // Screens
-import { OnboardingDeviceScreen } from '@screens/onboarding/OnboardingDeviceScreen';
-import { OnboardingNicknameScreen } from '@screens/onboarding/OnboardingNicknameScreen';
-import { ChatsScreen } from '@screens/main/ChatsScreen';
-import { ChatScreen } from '@screens/main/ChatScreen';
-import { FriendsScreen } from '@screens/main/FriendsScreen';
-import { AddFriendScreen } from '@screens/main/AddFriendScreen';
-import { ProfileScreen } from '@screens/main/ProfileScreen';
-import { SettingsScreen } from '@screens/main/SettingsScreen';
+import { OnboardingDeviceScreen } from '../screens/onboarding/OnboardingDeviceScreen';
+import { OnboardingNicknameScreen } from '../screens/onboarding/OnboardingNicknameScreen';
+import { ChatsScreen } from '../screens/ChatsScreen';
+import { ChatScreen } from '../screens/ChatScreen';
+import { FriendsScreen } from '../screens/FriendsScreen';
+import { AddFriendScreen } from '../screens/AddFriendScreen';
+import { ProfileScreen } from '../screens/ProfileScreen';
+import { SettingsScreen } from '../screens/SettingsScreen';
 
 // Navigation types
 export type RootStackParamList = {

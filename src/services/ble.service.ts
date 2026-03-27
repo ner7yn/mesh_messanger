@@ -63,7 +63,7 @@ class BLEService {
     }
 
     if (Platform.OS === 'android') {
-      const apiLevel = parseInt(Platform.Version as string, 10);
+      const apiLevel = Platform.Version;
 
       if (apiLevel >= 31) {
         // Android 12+

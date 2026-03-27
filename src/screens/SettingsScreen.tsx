@@ -12,10 +12,10 @@ import {
   Platform,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useTheme } from '@hooks/useTheme';
-import { useAppStore } from '@store/index';
+import { useTheme } from '../hooks/useTheme';
+import { useAppStore } from '../store/index';
 import { useTranslation } from 'react-i18next';
-import i18n from '@i18n/index';
+import i18n from '../i18n/index';
 
 export function SettingsScreen() {
   const navigation = useNavigation();

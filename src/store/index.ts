@@ -1,7 +1,7 @@
 // src/store/index.ts
 import { create } from 'zustand';
-import { storageService, StoredMessage } from '@services/storage.service';
-import { generateKeyPair } from '@services/crypto.service';
+import { storageService, StoredMessage } from '../services/storage.service';
+import { generateKeyPair } from '../services/crypto.service';
 
 // ─── Types ─────────────────────────────────────────────────────────────────
 

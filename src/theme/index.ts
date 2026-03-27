@@ -92,7 +92,7 @@ export interface AppTheme {
 }
 
 export const createTheme = (isDark: boolean): AppTheme => ({
-  colors: isDark ? DarkColors : LightColors,
+  colors: (isDark ? DarkColors : LightColors) as ColorScheme,
   typography: Typography,
   spacing: Spacing,
   borderRadius: BorderRadius,

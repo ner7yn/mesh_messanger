@@ -1,7 +1,7 @@
 // src/utils/time.ts
 import { format, isToday, isYesterday, formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
-import i18n from '@i18n/index';
+import i18n from '../i18n/index';
 
 function getLocale() {
   return i18n.language === 'ru' ? ru : undefined;

@@ -11,12 +11,12 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { ChatsStackParamList } from '@navigation/index';
-import { useTheme } from '@hooks/useTheme';
-import { useAppStore, Chat } from '@store/index';
+import { ChatsStackParamList } from '../navigation/index';
+import { useTheme } from '../hooks/useTheme';
+import { useAppStore, Chat } from '../store/index';
 import { useTranslation } from 'react-i18next';
-import { useMesh } from '@hooks/useMesh';
-import { formatTime } from '@utils/time';
+import { useMesh } from '../hooks/useMesh';
+import { formatTime } from '../utils/time';
 
 type Nav = NativeStackNavigationProp<ChatsStackParamList, 'ChatList'>;
 

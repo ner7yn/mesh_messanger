@@ -13,10 +13,10 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { OnboardingStackParamList } from '@navigation/index';
-import { useTheme } from '@hooks/useTheme';
-import { bleService, BLEDevice } from '@services/ble.service';
-import { useAppStore } from '@store/index';
+import { OnboardingStackParamList } from '../../navigation/index';
+import { useTheme } from '../../hooks/useTheme';
+import { bleService, BLEDevice } from '../../services/ble.service';
+import { useAppStore } from '../../store/index';
 import { useTranslation } from 'react-i18next';
 
 type Nav = NativeStackNavigationProp<OnboardingStackParamList, 'OnboardingDevice'>;

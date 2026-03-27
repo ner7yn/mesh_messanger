@@ -13,12 +13,12 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { ProfileStackParamList } from '@navigation/index';
-import { useTheme } from '@hooks/useTheme';
-import { useAppStore } from '@store/index';
+import { ProfileStackParamList } from '../navigation/index';
+import { useTheme } from '../hooks/useTheme';
+import { useAppStore } from '../store/index';
 import { useTranslation } from 'react-i18next';
-import { getKeyFingerprint } from '@services/crypto.service';
-import { bleService } from '@services/ble.service';
+import { getKeyFingerprint } from '../services/crypto.service';
+import { bleService } from '../services/ble.service';
 
 type Nav = NativeStackNavigationProp<ProfileStackParamList, 'ProfileMain'>;
 

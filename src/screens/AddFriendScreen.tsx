@@ -11,12 +11,12 @@ import {
   Share,
 } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
-import { FriendsStackParamList } from '@navigation/index';
-import { useTheme } from '@hooks/useTheme';
-import { useAppStore } from '@store/index';
+import { FriendsStackParamList } from '../navigation/index';
+import { useTheme } from '../hooks/useTheme';
+import { useAppStore } from '../store/index';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
-import { isValidPublicKey, getKeyFingerprint } from '@services/crypto.service';
+import { isValidPublicKey, getKeyFingerprint } from '../services/crypto.service';
 
 // Note: RNCamera / Vision Camera required for actual QR scanning
 // Using a mock interface here that shows the full integration structure

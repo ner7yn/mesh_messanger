@@ -11,11 +11,11 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { FriendsStackParamList } from '@navigation/index';
-import { useTheme } from '@hooks/useTheme';
-import { useAppStore, Friend } from '@store/index';
+import { FriendsStackParamList } from '../navigation/index';
+import { useTheme } from '../hooks/useTheme';
+import { useAppStore, Friend } from '../store/index';
 import { useTranslation } from 'react-i18next';
-import { formatRelativeTime } from '@utils/time';
+import { formatRelativeTime } from '../utils/time';
 
 type Nav = NativeStackNavigationProp<FriendsStackParamList, 'FriendList'>;
 

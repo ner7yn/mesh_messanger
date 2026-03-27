@@ -1,8 +1,8 @@
 // src/hooks/useTheme.ts
 import { useColorScheme } from 'react-native';
 import { useMemo } from 'react';
-import { createTheme, AppTheme } from '@theme/index';
-import { useAppStore } from '@store/index';
+import { createTheme, AppTheme } from '../theme/index';
+import { useAppStore } from '../store/index';
 
 export function useTheme(): AppTheme {
   const systemColorScheme = useColorScheme();

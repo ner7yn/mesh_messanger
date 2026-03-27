@@ -14,13 +14,13 @@ import {
   Animated,
 } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
-import { ChatsStackParamList } from '@navigation/index';
-import { useTheme } from '@hooks/useTheme';
-import { useAppStore } from '@store/index';
-import { storageService, StoredMessage } from '@services/storage.service';
-import { useMesh } from '@hooks/useMesh';
+import { ChatsStackParamList } from '../navigation/index';
+import { useTheme } from '../hooks/useTheme';
+import { useAppStore } from '../store/index';
+import { storageService, StoredMessage } from '../services/storage.service';
+import { useMesh } from '../hooks/useMesh';
 import { useTranslation } from 'react-i18next';
-import { formatMessageTime, formatDateSeparator } from '@utils/time';
+import { formatMessageTime, formatDateSeparator } from '../utils/time';
 
 type RouteType = RouteProp<ChatsStackParamList, 'Chat'>;
 

@@ -1,9 +1,9 @@
 // src/services/storage.service.ts
 // Persistent storage using react-native-mmkv (fast synchronous key-value store)
 
-import { MMKV } from 'react-native-mmkv';
+import { createMMKV } from 'react-native-mmkv';
 
-const storage = new MMKV({ id: 'meshtalk' });
+const storage = createMMKV({ id: 'meshtalk' });
 
 export const StorageKeys = {
   // Onboarding / Profile
@@ -63,7 +63,7 @@ class StorageService {
   }
 
   delete(key: string): void {
-    storage.delete(key);
+    storage.remove(key);
   }
 
   clearAll(): void {
@@ -141,7 +141,7 @@ class StorageService {
     if (id) {
       storage.set(StorageKeys.CONNECTED_DEVICE_ID, id);
     } else {
-      storage.delete(StorageKeys.CONNECTED_DEVICE_ID);
+      storage.remove(StorageKeys.CONNECTED_DEVICE_ID);
     }
   }
 
@@ -153,7 +153,7 @@ class StorageService {
     if (name) {
       storage.set(StorageKeys.CONNECTED_DEVICE_NAME, name);
     } else {
-      storage.delete(StorageKeys.CONNECTED_DEVICE_NAME);
+      storage.remove(StorageKeys.CONNECTED_DEVICE_NAME);
     }
   }
 
@@ -186,7 +186,7 @@ class StorageService {
   }
 
   deleteMessages(chatId: string): void {
-    storage.delete(`${StorageKeys.MESSAGES_PREFIX}${chatId}`);
+    storage.remove(`${StorageKeys.MESSAGES_PREFIX}${chatId}`);
   }
 }
 

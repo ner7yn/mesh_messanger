@@ -1,10 +1,10 @@
 // src/hooks/useMesh.ts
 import { useEffect, useCallback } from 'react';
-import { useAppStore } from '@store/index';
-import { meshService, PacketType, MeshPacket, HelloPayload } from '@services/mesh.service';
-import { storageService } from '@services/storage.service';
-import { bleService, BLEConnectionState } from '@services/ble.service';
-import { isValidPublicKey } from '@services/crypto.service';
+import { useAppStore } from '../store/index';
+import { meshService, PacketType, MeshPacket, HelloPayload } from '../services/mesh.service';
+import { storageService } from '../services/storage.service';
+import { bleService, BLEConnectionState } from '../services/ble.service';
+import { isValidPublicKey } from '../services/crypto.service';
 import { v4 as uuidv4 } from 'uuid';
 
 export function useMesh() {

@@ -3,11 +3,11 @@ import 'react-native-get-random-values'; // Must be first import for crypto
 import React, { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AppNavigator } from '@navigation/index';
-import { useAppStore } from '@store/index';
-import { initI18n } from '@i18n/index';
-import { storageService } from '@services/storage.service';
-import { meshService } from '@services/mesh.service';
+import { AppNavigator } from './src/navigation/index';
+import { useAppStore } from './src/store/index';
+import { initI18n } from './src/i18n/index';
+import { storageService } from './src/services/storage.service';
+import { meshService } from './src/services/mesh.service';
 import FlashMessage from 'react-native-flash-message';
 
 export default function App() {
