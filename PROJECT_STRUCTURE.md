@@ -1,49 +1,64 @@
-# PROJECT_STRUCTURE
+# PROJECT_STRUCTURE.md
 
-```text
-mesh_messanger/
-├─ App.tsx                        # Корневой провайдер + навигационный shell
-├─ app.json                       # Имя RN-приложения
-├─ index.js                       # Entry point React Native
-├─ package.json                   # Скрипты и зависимости
-├─ tsconfig.json                  # Конфигурация TypeScript
-├─ README.md                      # Описание проекта и запуск
-└─ src/
-   ├─ components/
-   │  ├─ MessageBubble.tsx        # Пузырь сообщения в стиле мессенджера
-   │  └─ Screen.tsx               # Базовый безопасный контейнер экрана
-   ├─ i18n/
-   │  ├─ translations.ts          # RU/EN словари
-   │  └─ useI18n.ts               # Вспомогательная функция t(locale,key)
-   ├─ navigation/
-   │  └─ AppNavigator.tsx         # Onboarding -> Tabs -> Chat stack
-   ├─ screens/
-   │  ├─ OnboardingScreen.tsx     # BLE подключение + ввод ника
-   │  ├─ ChatsScreen.tsx          # Список чатов
-   │  ├─ ChatScreen.tsx           # Диалог + отправка сообщений
-   │  ├─ FriendsScreen.tsx        # QR-контакт, импорт друга, список друзей
-   │  └─ SettingsScreen.tsx       # Переключение языка и темы
+```
+meshtalk_flutter/
+├─ pubspec.yaml                        # Flutter зависимости и метаданные проекта
+├─ analysis_options.yaml               # Линтеры Dart
+└─ lib/
+   ├─ main.dart                        # Точка входа: инициализация хранилища + запуск приложения
+   ├─ core/
+   │  ├─ theme/
+   │  │  └─ app_theme.dart             # Светлая/тёмная темы в стиле мессенджера
+   │  └─ i18n/
+   │     └─ app_i18n.dart              # Встроенная локализация RU/EN (по умолчанию RU)
+   ├─ models/
+   │  ├─ profile.dart                  # Профиль пользователя (nodeId, nickname, publicKey)
+   │  ├─ friend.dart                   # Модель друга
+   │  ├─ chat.dart                     # Модель чата
+   │  └─ message.dart                  # Модель сообщения + статусы
    ├─ services/
-   │  ├─ bleService.ts            # Поиск/подключение LoRa BLE-девайса
-   │  ├─ cryptoService.ts         # Генерация ключей, encrypt/decrypt
-   │  └─ storageService.ts        # Persist профиля, друзей, чатов
-   ├─ store/
-   │  └─ AppContext.tsx           # Централизованное состояние приложения
-   ├─ theme/
-   │  ├─ palette.ts               # Цветовые палитры light/dark
-   │  └─ useTheme.ts              # Выбор палитры по теме
-   └─ types/
-      └─ models.ts                # Доменные типы (Profile/Friend/Chat)
+   │  ├─ storage_service.dart          # Локальное хранение (Hive) + secure key storage
+   │  ├─ crypto_service.dart           # E2E шифрование (X25519 + ChaCha20-Poly1305)
+   │  ├─ ble_service.dart              # BLE scan/connect для LoRa-контроллера
+   │  └─ mesh_service.dart             # Подготовка зашифрованных payload для mesh-транспорта
+   ├─ state/
+   │  ├─ app_state.dart                # Riverpod store: профиль, друзья, чаты, сообщения, настройки
+   │  └─ router.dart                   # GoRouter: onboarding -> home tabs -> chat
+   ├─ screens/
+   │  ├─ onboarding/
+   │  │  ├─ onboarding_ble_screen.dart       # Шаг 1: BLE подключение контроллера
+   │  │  └─ onboarding_nickname_screen.dart  # Шаг 2: ввод никнейма и создание ключей
+   │  ├─ home/
+   │  │  └─ home_shell.dart            # Нижняя навигация (чаты/друзья/настройки)
+   │  ├─ chats/
+   │  │  ├─ chats_screen.dart          # Список чатов
+   │  │  └─ chat_screen.dart           # Экран диалога (пузыри как в мессенджере)
+   │  ├─ friends/
+   │  │  └─ friends_screen.dart        # Друзья + мой QR + сканер QR
+   │  └─ settings/
+   │     └─ settings_screen.dart       # Тема + язык
+   └─ widgets/                         # Резерв под переиспользуемые виджеты
 ```
 
 ## Поток первого входа
+1. `OnboardingBleScreen`: сканирование BLE и подключение LoRa-контроллера.
+2. `OnboardingNicknameScreen`: ввод никнейма.
+3. Генерируется ключевая пара X25519, приватный ключ хранится в secure storage.
+4. Профиль и настройки сохраняются локально.
 
-1. `OnboardingScreen` запускает BLE-скан и подключает LoRa-контроллер.
-2. После успешного соединения пользователь вводит ник.
-3. Создаётся профиль с ключевой парой и сохраняется локально.
+## E2E шифрование
+- Для каждого пользователя создаётся X25519 keypair.
+- Шифрование: shared secret (X25519) + ChaCha20-Poly1305.
+- Расшифровать может только получатель с приватным ключом.
+- В payload передаётся только ciphertext/nonce/mac + public key отправителя.
 
-## Концепция друзей и сообщений
+## Хранение данных
+- Hive: профиль, друзья, чаты, сообщения.
+- Flutter Secure Storage: приватный ключ.
 
-- Добавление друга: импорт JSON из QR (`id`, `nickname`, `publicKey`).
-- Отправка сообщения: `encryptForRecipient(...)` -> ciphertext payload.
-- Хранение: plaintext история в `AsyncStorage` (для UX), при реальном mesh-транспорте отправляется ciphertext.
+## Функционал
+- Telegram-подобный интерфейс (список чатов, чат-пузыри, нижняя навигация).
+- Светлая и тёмная темы.
+- Язык RU по умолчанию, переключение на EN.
+- Добавление друзей через QR.
+- Локальная история переписок.
